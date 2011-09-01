@@ -2,18 +2,23 @@
 print("==================a.lua==================")
 
 
-lc:setPos(lc:getPos())
-
-print("lua  " .. lc:f0())
 lc:f0v()
 
-print("lua  " .. lc:f1("hello cpp!"))
+print("lua  return of f0 = " .. lc:f0())
+
+
+----[[
+lc:setPos(lc:getPos())
+
+print("lua  return of f1 = " .. lc:f1("hello cpp!"))
 lc:f1v(222);
 
 print("lua  " .. lc:f2(1, 2))
 lc:f2v(223, 224);
 
 testabc(33, "abc")
+
+print("ok now!");
 
 local za1, za2 = lc:luaMemberFunction(22, 11)
 print("lua  za1 = " .. za1 .. "  za2 = " .. za2)
@@ -52,6 +57,8 @@ end
 function lua_param6(i1, i2, i3, i4, i5, i6)
 	print("lua  lua_param6 i1 = " .. i1 .. " i2 = " .. i2  .. " i3 = " .. i3 .. " i4 = " .. i4 .. " i5 = " .. i5 .. " i6 = " .. i6)
 end
+
+--]]
 
 
 --[[
