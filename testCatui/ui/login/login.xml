@@ -20,4 +20,7 @@
 		borderSizeY="5"
 		text="ÎÒÊÇaabcee°¢ÈøµÂ·É">
 	</TextBox>
+	<OnShow>
+		Login_OnShow();
+	</OnShow>
 </Window>
