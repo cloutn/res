@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="GBK"?>
-<Window 
+<Frame
 	name="login" 
 	width="256" 
 	height="256" 
 	positionX="0" 
 	positionY="0" 
 	texture="window256">
-	<TextBox 
-		name="tb1" 
-		positionX="0" 
-		positionY="0" 
+	<Frame
+		name="$parent_frame1" 
 		width="162" 
-		height="30" 
-		texture="textBox" 
-		font="微软雅黑" 
-		fontSize="16" 
-		fontColor="0xFFAABBCC"
-		borderSizeX="5" 
-		borderSizeY="5"
-		text="我是aabcee阿萨德飞">
-	</TextBox>
-	<OnShow>
-		Login_OnShow();
-	</OnShow>
-</Window>
+		height="130" 
+		positionX="20" 
+		positionY="20">
+		<Icon 
+			name="$parent_icon1"
+			width="64" 
+			height="64" 
+			positionX="10" 
+			positionY="10"
+			texture="Spell_Fire_Fireball02"
+			cycleTime ="10000"
+			maskColor = "0xAAAABBCC">
+		</Icon>
+		<Icon 
+			name="$parent_icon2"
+			width="64" 
+			height="64" 
+			positionX="40" 
+			positionY="40"
+			texture="Spell_Fire_Fireball02"
+			cycleTime ="3000"
+			maskColor = "0xAA00BBCC">
+		</Icon>
+	</Frame>
+</Frame>

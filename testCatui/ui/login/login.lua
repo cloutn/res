@@ -1,4 +1,4 @@
-function Login_OnShow()
-	print("login.lua::Login_OnShow")
-	tb1:setText("¹þ¹þlala£¡");
+
+function Login_Message()
+	print("this is login.lua!");
 end
