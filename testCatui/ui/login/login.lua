@@ -1,4 +1,4 @@
 
-function Login_Message()
-	print("this is login.lua!");
+function Login_Message(x)
+	print("this is login.lua!" .. x);
 end

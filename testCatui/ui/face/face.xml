@@ -18,7 +18,38 @@
 		fontColor="0xFFAABBCC"
 		borderSizeX="5" 
 		borderSizeY="5"
+		selectBackgroundColor = "FFFF0000"
+		caretColor = "FF0000FF"
 		enableCaretBlink="false"
-		text="face">
+		text="ÎÒ">
 	</TextBox>
+	<Button 
+		name="bt1" 
+		positionX="30" 
+		positionY="50" 
+		width="100" 
+		height="30" 
+		texture="orange" 
+		hoverImage = "blue"
+		font="Î¢ÈíÑÅºÚ" 
+		fontSize="16" 
+		fontColor="0xFFAABBCC"
+		hoverColor = "77FFFFFF"
+		normalColor = "AAFFFFFF"
+		text="°´Å¥1">
+		<OnClick>
+			bt1_OnClick()
+		</OnClick>
+	</Button>
+	<StaticText 
+		name="staticText1" 
+		positionX="50" 
+		positionY="80" 
+		width="100" 
+		height="30" 
+		font="Î¢ÈíÑÅºÚ" 
+		fontSize="16" 
+		fontColor="0xFFAABBCC"
+		text="¾²Ì¬ÎÄ×Ö">
+	</StaticText>
 </Frame>
