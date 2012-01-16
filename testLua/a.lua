@@ -121,6 +121,11 @@ AAA_1:func1(1)
 
 global_a = 666
 
+function function_in_lua(p1)
+	print("function_in_lua" .. p1);
+end
+
+
 
 
 
