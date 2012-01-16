@@ -23,7 +23,7 @@ windows下测试用的库是127.0.0.1:3306
 
 
 配置文件：
-linux下在etc/my.cfg   没试过
+linux下在etc/my.cfg
 windows下载c:/windows/my.ini
 
 show status like "%max%"
