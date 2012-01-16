@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Frame
+	name="icon" 
+	width="256" 
+	height="256" 
+	positionX="0" 
+	positionY="0" 
+	color = "0x77FFFFFF"
+	alpha = "0.3"
+	texture="window256">
+	<OnShow>
+			Login_Message(66)
+	</OnShow>
+	<Frame
+		name="$parent_frame1" 
+		width="162" 
+		height="130" 
+		positionX="20" 
+		positionY="20"
+		color = "77ffffFF"
+		texture = "blue">
+		<Icon 
+			name="$parent_icon1"
+			width="64" 
+			height="64" 
+			positionX="10" 
+			positionY="10"
+			texture="Spell_Fire_Fireball02"
+			cycleTime ="10000"
+			color="88AABBCC"
+			maskColor = "0xAAAABBCC">
+		</Icon>
+		<Icon 
+			name="$parent_icon2"
+			width="64" 
+			height="64" 
+			positionX="40" 
+			positionY="40"
+			texture="Spell_Fire_Fireball02"
+			cycleTime ="3000"
+			maskColor = "0xAA00BBCC">
+		</Icon>
+	</Frame>
+</Frame>
