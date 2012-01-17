@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="GBK"?>
+<Frame
+	name="face" 
+	width="256" 
+	height="256" 
+	positionX="300" 
+	positionY="200"
+	color = "00000000" >
+	<EditBox 
+		name="tb1" 
+		positionX="0" 
+		positionY="0" 
+		width="200" 
+		height="37" 
+		color="0"
+		texture="" 
+		font="微软雅黑" 
+		fontSize="16" 
+		fontColor="0xFFFFFFFF"
+		borderSizeX="11" 
+		borderSizeY="5"
+		selectBackgroundColor = "66FFFFFF"
+		caretWidth= "4"
+		caretColor = "FFFFFFFF"
+		enableCaretBlink="false"
+		text="_j33">
+		<Backdrop edgeFile="border" bgFile="" color="88aa00ff">
+			<BackgroundInsets>
+				<AbsInset left="10" right="5" top="4" bottom="9"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</EditBox>
+	<EditBox 
+		name="tb2" 
+		positionX="0" 
+		positionY="40" 
+		width="200" 
+		height="37" 
+		color="0xFF000000"
+		texture="editBox" 
+		font="微软雅黑" 
+		fontSize="16" 
+		fontColor="0xFFFFFFFF"
+		borderSizeX="11" 
+		borderSizeY="5"
+		selectBackgroundColor = "66FFFFFF"
+		caretWidth= "4"
+		caretColor = "FFFFFFFF"
+		enableCaretBlink="false"
+		text="_44j">
+		<Backdrop edgeFile="border" bgFile="background" color="88FFFFFF">
+			<BackgroundInsets>
+				<AbsInset left="10" right="5" top="4" bottom="9"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</EditBox>
+</Frame>
