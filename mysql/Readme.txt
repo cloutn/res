@@ -17,6 +17,12 @@ service mysqld start
 
 windows下测试用的库是127.0.0.1:3306
 
+------------------------------------------------------------------------------------------------------------
+
+linux下编译选项：
+[root@bogon ~]# /usr/lib/mysql/mysql_config --libs
+-rdynamic -L/usr/lib/mysql -lmysqlclient -lz -lcrypt -lnsl -lm -L/usr/lib -lssl -lcrypto
+
 
 
 ------------------------------------------------------------------------------------------------------------
