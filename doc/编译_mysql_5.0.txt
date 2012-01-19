@@ -1,0 +1,11 @@
+解压缩 res/free/mysql-5.0.92.zip
+
+安装bison和cmake
+注意添加bison和cmake到环境变量PATH中
+
+在mysql-5.0.92这个目录下执行：（注意！必须在）
+win/build-vs8.bat
+注意，如果只安装了vs2008，需要修改build-vs8.bat中相应版本
+
+然后mysql-5.0.92目录就会有mysql.sln文件了
+
