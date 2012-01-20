@@ -1,0 +1,1 @@
+-*.obj;-*.WANMEI-5EB7EC6F.*;-*.ncb;-*.suo;-*PCaolei*;-.svn\;-Debug\;-Release\;-make\
