@@ -1,0 +1,71 @@
+
+centos6.2安装指南 2012年2月7日
+
+
+1.centos6和centos5的安装有个最大的区别，就是：
+必须有768m以上内存才能启动gui安装界面，从而选择destop版本或者sdk版本，
+否则，默认的console安装界面中，只能安装mini版的，没有选择其他版本的机会，mini版装了上啥都没有。网卡驱动都没有。
+
+
+2.虚拟机的操作系统类型必须选为linux/read hat,
+以前选的linux/other linux不行了，安装之前就会报cpu和kernel不匹配的错误。
+
+
+3.安装时候可以配置网卡，不过这个问题不大，如果选择sdk版本安装，那么基本上网卡装上就带了驱动，
+但是网卡默认是被禁用的，需要点一下屏幕右上角的带xx的电脑，选择启用eth0网卡，然l后dhcp就能开始获取ip啥的了。
+界面上有个选项，自动连接，勾上以后启动的时候就会自动连接eth0网卡了
+过程需要等待一段时间。
+virtualbox这边用的网络连接就是默认的NAT方式。
+
+
+4.安装之后最重要的事情就是和windows的文件共享了.
+第一步，在virtual里面设置数据空间，注意设置为固定分配的，至于那个“auto mount”选项，目前情况不明。
+第二部，在centos中安装virtualBox增强工具。注意这里openGL可能安装失败，不用管，反正用不到。
+第三部，在centos中创建以下3个目录 ~/share ~/chill ~/res
+第四部，在centos中执行命令： mount -t vboxsf share ~/share
+mount -t vboxsf chill ~/chill
+mount -t vboxsf res ~/res
+如果顺利，那么此时应该已经可以访问 ~/share 等文件夹，并看到windows下面的文件了。
+第五步，如果想每次启动的时候自动执行这些mount命令，那么:
+vim ~/.bash_profile
+把这三个命令，加入到文件末尾，然后reboot就行了。
+
+
+5.sdk版本的centOS6是没有mysql-server的，只有mysql-devel和mysql-client
+所以需要 yum install mysql-server
+注意安装完成的时候，mysql的配置还不是utf8的，必须先修改配置文件，把mysql的配置文件改成utf8的
+vim /etc/my.cnf
+按照相应section添加如下内容：
+[mysqld]
+default-character-set=utf8
+
+[client]
+default-character-set=utf8
+
+然后service mysqld start
+此时mysql是一个空库，找到 ~/res/mysql/test.sql文件
+执行： mysql 应该可以连接到mysqlserver了，
+然后在mysql提示符下输入：source ~/res/mysql/test.sql
+此时可以use test; select * from t1;
+注意，此时的头文件要使用mysql5.1.52的，否则某些结构体大小的定义会不一致。
+
+
+6.vim配置
+安装插件taglist,位于 ~/res/doc/taglist_42
+使用~/res/doc/.vimrc作为配置文件
+
+
+7.svn配置
+======修改svn的global-ignore======
+vim ~/.subversion/config
+找到global-ignore,改为~/res/doc/svn_global_ignore.txt中的内容。
+注意，global的前面不能有空格，否则svn无法解析配置文件。
+
+======修改svndiff工具======
+svn的diff工具可以改为vimdiff，具体需要将~/res/doc/svndiff_vim.sh拷贝到~/svndiff_vim.sh
+然后修改 ~/.subversion/config,
+diff-cmd = /root/svndiff_vim.sh 
+
+
+
+

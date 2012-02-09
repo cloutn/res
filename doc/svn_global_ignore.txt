@@ -1,0 +1,1 @@
+*.ilk Release make *.opensdf ipch *.ipch *.sdf *.suo *.ncb *.user *.obj *.pdb *.idb *.htm Debug *.o *.lo *.la *.al .libs *.so *.so.[0-9]* *.a *.pyc *.pyo *.rej *~ #*# .#* .*.swp .DS_Store
