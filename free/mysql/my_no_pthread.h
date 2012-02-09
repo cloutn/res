@@ -25,11 +25,7 @@
   even in non-threaded builds.
   Case in point: 'mf_keycache.c'
 */
-#if defined(__WIN__) || defined(OS2)
-
-#elif defined(HAVE_UNIXWARE7_THREADS)
-/* #include <thread.h>   Currently, not relevant. Enable if needed. */
-
+#if defined(__WIN__)
 #else /* Normal threads */
 #include <pthread.h>
 
@@ -50,5 +46,13 @@
 #define rw_wrlock(A)
 #define rw_unlock(A)
 #define rwlock_destroy(A)
+
+typedef int my_pthread_once_t;
+#define MY_PTHREAD_ONCE_INIT 0
+#define MY_PTHREAD_ONCE_DONE 1
+
+#define my_pthread_once(C,F) do { \
+    if (*(C) != MY_PTHREAD_ONCE_DONE) { F(); *(C)= MY_PTHREAD_ONCE_DONE; } \
+  } while(0)
 
 #endif
