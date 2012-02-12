@@ -6,23 +6,6 @@
 	positionX="300" 
 	positionY="200" 
 	texture="window256">
-	<TextBox 
-		name="tb1" 
-		positionX="0" 
-		positionY="0" 
-		width="162" 
-		height="30" 
-		texture="textBox" 
-		font="Î¢ÈíÑÅºÚ" 
-		fontSize="16" 
-		fontColor="0xFFAABBCC"
-		borderSizeX="5" 
-		borderSizeY="5"
-		selectBackgroundColor = "FFFF0000"
-		caretColor = "FF0000FF"
-		enableCaretBlink="false"
-		text="ÎÒ">
-	</TextBox>
 	<Button 
 		name="bt1" 
 		positionX="30" 
