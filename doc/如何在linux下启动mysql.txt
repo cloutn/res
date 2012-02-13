@@ -1,0 +1,5 @@
+/etc/init.d/mysqld start 
+
+ªÚ’ﬂ÷¥––£∫
+
+service mysqld start

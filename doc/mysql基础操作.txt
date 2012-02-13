@@ -1,0 +1,26 @@
+
+windows下测试用的库是127.0.0.1:3306
+
+
+配置文件：
+linux下在etc/my.cnf
+windows下载c:/windows/my.ini
+
+show status like "%max%"
+
+show variables like "%max%"
+
+显示所有数据库
+show databases;
+
+显示所有表格
+show tables;
+
+执行一个sql文件
+source test.sql
+
+------------------------------------帐户安全相关------------------------------------
+参见mysql5.1参考手册 "5.8.2. 向MySQL增加新用户账户"
+
+通过SHOW GRANTS语句检查查看谁已经访问了什么
+---------------------------------------------------------------------------------------

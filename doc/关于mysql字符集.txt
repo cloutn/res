@@ -1,0 +1,19 @@
+注意，在linux的my.cnf配置文件中，必须
+[mysqld]
+default-character-set=utf8
+
+[client]
+default-character-set=utf8
+
+然后在代码中，
+mysql_set_character_set(pConnection, "utf8");
+或者
+mysql_set_character_set(pConnection, "gbk");
+都行
+
+同时注意，建库建表的时候，都必须按照如下方式：
+CREATE TABLE `player` (
+  `name` varchar(255) default NULL,
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+
