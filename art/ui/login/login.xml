@@ -1,44 +1,58 @@
-<?xml version="1.0" encoding="gb2312"?>
+<?xml version="1.0" encoding="GBK"?>
 <Frame
 	name="login" 
-	width="256" 
-	height="256" 
+	width="313" 
+	height="139" 
 	positionX="0" 
-	positionY="0" 
-	color = "0x77FFFFFF"
-	alpha = "1"
-	texture="orange">
-	<OnShow>
-			Login_Message(66)
-	</OnShow>
-	<Frame
-		name="$parent_frame1" 
-		width="162" 
-		height="130" 
-		positionX="20" 
-		positionY="20"
-		color = "77ffffFF"
-		texture = "blue">
-		<Icon 
-			name="$parent_icon1"
-			width="64" 
-			height="64" 
-			positionX="10" 
-			positionY="10"
-			texture="Spell_Fire_Fireball02"
-			cycleTime ="10000"
-			color="88AABBCC"
-			maskColor = "0xAAAABBCC">
-		</Icon>
-		<Icon 
-			name="$parent_icon2"
-			width="64" 
-			height="64" 
-			positionX="40" 
-			positionY="40"
-			texture="Spell_Fire_Fireball02"
-			cycleTime ="3000"
-			maskColor = "0xAA00BBCC">
-		</Icon>
-	</Frame>
+	positionY="0"
+	texture = "ccdd"
+	color = "FFFFFFFF" >
+	<EditBox 
+		name="tb1" 
+		positionX="0" 
+		positionY="0" 
+		width="200" 
+		height="37" 
+		color="0"
+		texture="" 
+		font="微软雅黑" 
+		fontSize="16" 
+		fontColor="0xFFFFFFFF"
+		borderSizeX="11" 
+		borderSizeY="5"
+		selectBackgroundColor = "66FFFFFF"
+		caretWidth= "4"
+		caretColor = "FFFFFFFF"
+		enableCaretBlink="false"
+		text="_j33">
+		<Backdrop edgeFile="border" bgFile="" color="88aa00ff">
+			<BackgroundInsets>
+				<AbsInset left="10" right="5" top="4" bottom="9"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</EditBox>
+	<EditBox 
+		name="tb2" 
+		positionX="0" 
+		positionY="40" 
+		width="200" 
+		height="37" 
+		color="0xFF000000"
+		texture="editBox" 
+		font="微软雅黑" 
+		fontSize="16" 
+		fontColor="0xFFFFFFFF"
+		borderSizeX="11" 
+		borderSizeY="5"
+		selectBackgroundColor = "66FFFFFF"
+		caretWidth= "4"
+		caretColor = "FFFFFFFF"
+		enableCaretBlink="false"
+		text="_44j">
+		<Backdrop edgeFile="border" bgFile="background" color="88FFFFFF">
+			<BackgroundInsets>
+				<AbsInset left="10" right="5" top="4" bottom="9"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</EditBox>
 </Frame>

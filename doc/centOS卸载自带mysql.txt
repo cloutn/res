@@ -1,0 +1,34 @@
+卸载Mysql 
+
+[root@localhost ~]# rpm -qa|grep mysql 
+
+mod_auth_mysql-2.6.1-2.2 
+
+php-mysql-4.3.9-3.15 
+
+mysql-devel-4.1.20-1.RHEL4.1 
+
+mysql-4.1.20-1.RHEL4.1 
+
+mysqlclient10-3.23.58-4.RHEL4.1 
+
+libdbi-dbd-mysql-0.6.5-10.RHEL4.1 
+
+
+
+说明：rpm –qa | grep mysql 命令是为了把mysql相关的包都列出来，我上面的例子是Linux AS4默认安装mysql的rpm软件包列表，如果是别的Linux版本列出来的列表有可能会不一样，不过不用担心，不管是什么，卸载都从最下面的一个包开始，直到卸载掉第一个为止。 
+
+
+
+比如：在这个例子中，我们应该先卸载libdbi-dbd-mysql-0.6.5-10.RHEL4.1 方法如下：rpm –e -dbd-mysql-0.6.5-10.RHEL4.1 
+
+
+
+说明：rpm –e 是卸载rpm包的命令，后面是包名称，最后的版本号是不用打的，比如我们下一步卸载mysqlclient10-3.23.58-4.RHEL4.1包，方法如下： 
+
+
+
+rpm –e mysqlclient
+
+
+

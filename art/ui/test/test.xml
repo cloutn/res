@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Frame
+	name="test" 
+	width="1024" 
+	height="1024" 
+	positionX="0" 
+	positionY="0" 
+	color = "0x00000000">
+	<Frame
+		name="q01" 
+		width="512" 
+		height="512" 
+		positionX="0" 
+		positionY="0"
+		texture = "q1_01" >
+	</Frame>
+	<Frame
+		name="q02" 
+		width="512" 
+		height="512" 
+		positionX="512" 
+		positionY="0"
+		texture = "q1_02" >
+	</Frame>
+</Frame>

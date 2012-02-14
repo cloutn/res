@@ -1,5 +1,0 @@
-
-#ÕâÊÇ×¢ÊÍtest
-
-tb_button.lua
-tb_button.xml
