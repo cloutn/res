@@ -11,15 +11,39 @@
 		width="512" 
 		height="512" 
 		positionX="0" 
-		positionY="0"
-		texture = "q1_01" >
+		positionY="0">
+		<Texture file = "ui/q1_01.png">
+			<TexCoords left="0" right="1" top="0" bottom="1"/>
+		</Texture>
 	</Frame>
 	<Frame
 		name="q02" 
 		width="512" 
 		height="512" 
 		positionX="512" 
-		positionY="0"
-		texture = "q1_02" >
+		positionY="0">
+		<Texture file = "ui/q1_02.png">
+			<TexCoords left="0" right="1" top="0" bottom="1"/>
+		</Texture>
+	</Frame>
+	<Frame
+		name="q03" 
+		width="512" 
+		height="256" 
+		positionX="0" 
+		positionY="512">
+		<Texture file = "ui/q1_03.png">
+			<TexCoords left="0" right="1" top="0" bottom="0.5"/>
+		</Texture>
+	</Frame>
+	<Frame
+		name="q04" 
+		width="512" 
+		height="256" 
+		positionX="512" 
+		positionY="512">
+		<Texture file = "ui/q1_04.png">
+			<TexCoords left="0" right="1" top="0" bottom="0.5"/>
+		</Texture>
 	</Frame>
 </Frame>
