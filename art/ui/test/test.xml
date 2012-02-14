@@ -53,15 +53,63 @@
 	</Frame>
 	<Frame
 		name="sub_1" 
-		width="100" 
-		height="300" 
+		width="200" 
+		height="500" 
 		positionX="300" 
-		positionY="300" 
+		positionY="250" 
 		color = "0x00000000">
-		<Button 
-			name="test_bt1" 
+		<EditBox 
+			name="test_editbox1" 
 			positionX="0" 
 			positionY="0" 
+			width="200" 
+			height="37" 
+			color="0"
+			texture="" 
+			font="Î¢ÈíÑÅºÚ" 
+			fontSize="16" 
+			fontColor="0xFFFFFFFF"
+			borderSizeX="11" 
+			borderSizeY="5"
+			selectBackgroundColor = "66FFFFFF"
+			caretWidth= "4"
+			caretColor = "FFFFFFFF"
+			enableCaretBlink="false"
+			text="_j33">
+			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
+				<BackgroundInsets>
+					<AbsInset left="10" right="5" top="4" bottom="9"/>
+				</BackgroundInsets>
+			</Backdrop>
+		</EditBox>
+		<EditBox 
+			name="test_editbox2" 
+			positionX="0" 
+			positionY="47" 
+			width="200" 
+			height="37" 
+			color="0"
+			texture="" 
+			font="Î¢ÈíÑÅºÚ" 
+			fontSize="16" 
+			fontColor="0xFFFFFFFF"
+			borderSizeX="11" 
+			borderSizeY="5"
+			selectBackgroundColor = "66FFFFFF"
+			caretWidth= "4"
+			caretColor = "FFFFFFFF"
+			enableCaretBlink="false"
+			text="password">
+			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
+				<BackgroundInsets>
+					<AbsInset left="10" right="5" top="4" bottom="9"/>
+				</BackgroundInsets>
+			</Backdrop>
+		</EditBox>
+		<Button 
+			name="test_bt1" 
+			positionX="25" 
+			positionY="90" 
 			width="150" 
 			height="50" 
 			font="Î¢ÈíÑÅºÚ" 
@@ -69,7 +117,7 @@
 			fontColor="0xFFAABBCC"
 			hoverColor = "FFFFFFFF"
 			normalColor = "FFFFFFFF"
-			text="">
+			text="          µÇÂ¼">
 			<NormalTexture file="ui/ButtonUp.png">
 				<TexCoords left="0" right="0.578125" top="0" bottom="0.75"/>
 			</NormalTexture>
