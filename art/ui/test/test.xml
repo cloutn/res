@@ -5,7 +5,8 @@
 	height="1024" 
 	positionX="0" 
 	positionY="0" 
-	color = "0x00000000">
+	color = "0x00000000"
+	movable="false">
 	<Frame
 		name="q01" 
 		width="512" 
