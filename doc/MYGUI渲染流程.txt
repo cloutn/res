@@ -1,0 +1,17 @@
+directX相关渲染起始点在这个vcproj中MyGUI.DirectXPlatform
+
+渲染起始函数：
+DirectXRenderManager::drawOneFrame
+
+其中，调用LayerManager来渲染各个层次
+LayerManager::getInstance().renderToTarget(this, mUpdate);
+
+总体来说LayerManager是调用了RenderItem的renderToTarget方法来进行渲染的
+
+RenderItem::renderToTarget内部，循环绘制DrawItem
+for (VectorDrawItem::iterator iter=mDrawItems.begin()
+
+这里就是调用ISubWidget.doRender方法
+
+文字的绘制位于EditText::doRender()
+

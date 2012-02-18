@@ -1,0 +1,199 @@
+从chill.testUI的例子可以看到，显然CEGUI的渲染是从下面这个函数开始的：
+CEGUI::System::getSingleton().renderGUI();
+
+这个函数先是调用了Direct3D9Renderer::beginRendering() 来准备渲染，这里都是初始化一些d3d的渲染状态，没啥好说的东西。
+
+然后
+d_activeSheet->render();
+实际调用了
+Window::render()
+
+RenderingSurface::draw
+
+
+
+大致堆栈如下：
+ImageryComponent::render_impl(CEGUI::Window & srcWindow={...}, CEGUI::Rect & destRect={...}, const CEGUI::ColourRect * modColours=0x00000000, const CEGUI::Rect * clipper=0x0012eee8, bool __formal=false)  行96	C++
+FalagardComponentBase::render(CEGUI::Window & srcWindow={...}, const CEGUI::ColourRect * modColours=0x00000000, const CEGUI::Rect * clipper=0x0012ef00, bool clipToDisplay=false)  行54 + 0x24 字节	C++
+ImagerySection::render(CEGUI::Window & srcWindow={...}, const CEGUI::ColourRect * modColours=0x0012f230, const CEGUI::Rect * clipper=0x00000000, bool clipToDisplay=false)  行65 + 0x26 字节	C++
+SectionSpecification::render(CEGUI::Window & srcWindow={...}, const CEGUI::ColourRect * modcols=0x00000000, const CEGUI::Rect * clipper=0x00000000, bool clipToDisplay=false)  行100	C++
+LayerSpecification::render(CEGUI::Window & srcWindow={...}, const CEGUI::ColourRect * modcols=0x00000000, const CEGUI::Rect * clipper=0x00000000, bool clipToDisplay=false)  行43 + 0x20 字节	C++
+StateImagery::render(CEGUI::Window & srcWindow={...}, const CEGUI::ColourRect * modcols=0x00000000, const CEGUI::Rect * clipper=0x00000000)  行47 + 0x26 字节	C++
+FalagardButton::render()  行73 + 0x58 字节	C++
+Window::bufferGeometry(const CEGUI::RenderingContext & __formal={...})  行1242 + 0x1d 字节	C++
+Window::drawSelf(const CEGUI::RenderingContext & ctx={...})  行1222	C++
+Window::render()  行1205 + 0x16 字节	C++
+Window::render()  行1210 + 0x19 字节	C++
+Window::render()  行1210 + 0x19 字节	C++
+System::renderGUI()  行411	C++
+
+
+每一帧都会调用Direct3D9GeometryBuffer::draw
+
+
+
+
+CEGUI程序框架与渲染流程浅析 (2010-11-12 10:29:30)转载
+标签： xml_parse setproperty setbackground enabled looknfeel scheme	分类： Ogre_3D
+　　本文在CEGUI0.7.4源码的基础上对CEGUI的程序框架和渲染流程进行简单的分析，首先需要下载和编译CEGUI的源码，源码和依赖文件在这里，下载相应的Source Code还有对应的Dependencise（我是用的是VS2008_SP1所以下载的是CEGUI 0.7.x-r2 precompiled dependencies for MSVC++ 2008 (with SP1) (.zip file)这个）。
+　　下载源码后解压到CEGUI-0.7.4，依赖文件里面是一个Dependencies文件夹，解压后放到CEGUI-0.7.4文件夹下，然后进入CEGUI-0.7.4\projects\premake找到目录下相应的config.lua文件进行编辑。具体的选项可以参考之前配置CEGUI和Ogre环境的文章，这里不详述。（如果你的作品要和Ogre联合静态编译的话，那么注意一点，WANT_STATIC_BUILD设置为true的时候下面的STATIC_BUILD_WITH_DYNAMIC_DEPS也要设置为true，这样工程CRT就是MT了，不然没办法和Ogre静态链接成功。）本次需要用到Samples，但是最好不要把config.lua中的SAMPLES_INCLUDED设置为true，而是使用目录下的build_samples_vs2008.bat来生成独立的Samples工程。
+　　只需要把Debug版本的工程完全编译就可以了，然后我们以Sample_FirstWindow为例，一步一步探查下CEGUI的结构，当然为了更好的分析各个模块的原理，我们需要对Sample_FirstWindow进行代码改造，找到并注释掉
+ 
+DefaultWindow* root = (DefaultWindow*)winMgr.createWindow("DefaultWindow", "Root");
+ 
+然后在System::getSingleton().setGUISheet(root);这一句前面添加如下代码：
+ 
+ // load an image to use as a background
+    ImagesetManager::getSingleton().createFromImageFile("BackgroundImage", "GPN-2000-001437.tga");
+    // here we will use a StaticImage as the root, then we can use it to place a background image
+    Window* root = winMgr.createWindow("TaharezLook/StaticImage", "background_wnd");
+    // set position and size
+    root->setPosition(UVector2(cegui_reldim(0), cegui_reldim( 0)));
+    root->setSize(UVector2(cegui_reldim(1), cegui_reldim( 1)));
+    // disable frame and standard background
+    root->setProperty("FrameEnabled", "false");
+    root->setProperty("BackgroundEnabled", "false");
+    // set the background image
+    root->setProperty("Image", "set:BackgroundImage image:full_image");
+ 
+　　然后就可以开始单步调试了，在工程上右键->调试->进入单步新实例然后F11，会走到app.run();这一句，继续F11进去，来到CEGuiSample::run()再到CEGuiSample::initialise()往下走，是显示渲染系统对话框的代码，然后选择之后会new一个CEGuiD3D9BaseApplication()，F11进去（当然这个时候先进去的是new.cpp，shift+F11就出来了，此时再F11就会进到CEGuiD3D9BaseApplication()函数里了），F10到initialiseResourceGroupDirectories();，然后跟进去，会发现这个函数是设置ResourceGroup文件夹的，后面的initialiseDefaultResourceGroups();函数则是设置默认的资源文件夹，当然我们可以跟进去看一下，例如在CEGUI::Imageset::setDefaultResourceGroup("imagesets");这一句上F11，（当然你先进去的是CEGUIString.h，这是调用先后次序问题，shift+F11会回来，继续F11会进入下一个调用，直到进入我们关心的函数为止，以后还会遇到这样的问题，不再复述，“F11进去”即是进入到我们关心的函数里。）发现到了CEGUIImageset.h
+ 
+d_defaultResourceGroup = resourceGroup;
+ 
+　　这里只是做了简单的初始化，然后你可以shift+F11运行完这个函数了，至于下面的XMLParser还有Property的东西，将会在下文探讨。
+　　回到CEGuiD3D9BaseApplication::CEGuiD3D9BaseApplication()中，下面的一段代码是设置fps和logo的单独渲染的代码。shift+F11回到CEGuiSample.cpp中，然后F10单步到if (d_sampleApp->execute(this))这句，跟进去，到
+ 
+sampleApp->initialiseSample();
+ 
+　　这里我们先停一下，在initialiseSample上右键，转到定义，会出现解析多义性的对话框，可以发想所有的样例都重载了initialiseSample函数，Esc退出对话框之后，我们先看看下面的代码，你会发现这是一个完整的消息循环
+ 
+guiSystem.renderGUI();
+ 
+　　这一句就是渲染的实现。好了这里我们先小结一下，大致的样例程序的框架是这样的，每个样例都会new一个app然后调用CEGuiSample的run函数，由run函数初始化相应的渲染系统，完成了logo和FPS的单独全局初始化，并初始化了默认资源文件夹路径，然后使用d_sampleApp->execute(this)执行CEGuiD3D9BaseApplication的渲染循环，渲染循环先根据不同的样例初始化Sample内容，然后开始渲染循环，中间不断更新FPS还有logo的旋转，最后调用guiSystem.rederGUI函数进行渲染。
+ 
+　　好了我们先在CEGuiD3D9BaseApplication::execute(CEGuiSample* sampleApp)的sampleApp->initialiseSample();这一句前面下一个断点，然后F11进去，来到FirstWindowSample::initialiseSample()中，然后就要小心些了，F11进入
+ 
+SchemeManager::getSingleton().create("TaharezLook.scheme");
+ 
+会来到CEGUINamedXMLResourceManager.h中的
+ 
+U xml_loader(xml_filename, resource_group);
+ 
+　　继续F11就来到了CEGUIScheme_xmlHandler.cpp中，此时我们已经来到了一类很重要的cpp文件中，只是，调试工具暂时帮不了我们的忙了，如果一路F11跟进的话，会来到CEGUIExpatParser.cpp中，然后来到十分诱人的这么一句
+ 
+if ( ! XML_Parse(parser, reinterpret_cast<const char*>(rawXMLData.getDataPtr()), rawXMLData.getSize(), true))
+ 
+　　你可以在这里下一个断点，每次F5到这里的时候，查看下rawXMLData的值，确实是XML文件，但是其间是怎么运作的，我们却再也跟不进去了……
+ 
+　　至此，很多我们想知道的很重要的线索断掉了，我们并不知道XML是怎么被解释的，以及里面的property又是怎么组织的。好了，我们自己回到CEGUIScheme_xmlHandler.cpp来看看吧，搜索
+ 
+void Scheme_xmlHandler::elementGUISchemeStart(const XMLAttributes& attributes)
+ 
+　　这个函数，然后给函数里面下一个断点。如果你之前F5的次数不多的话，现在F5还能命中这个断点呢。好了现在让我们使用shift+F5停止调试，仔细看看这个文件里的函数
+ 
+void Scheme_xmlHandler::elementStart(const String& element,
+                                     const XMLAttributes& attributes)
+ 
+这是一个分发函数，根据不同的输入启动相应的Start函数，其他的函数除了
+ 
+void Scheme_xmlHandler::elementGUISchemeStart(const XMLAttributes& attributes)
+ 
+　　这个函数new了一个Scheme，其他的函数都是一些赋值和初始化。似乎有点意思，但是还是没有我们要找的XML元素的具体函数实现，好了现在来到CEGUI-0.7.4\cegui\src目录下，关键字搜索xml，出现了一批形如
+ 
+CEGUI****_xmlHandler.cpp
+ 
+的文件，当然，看名字就能知道都是哪些的实现，这里我们以CEGUIFalagard_xmlHandler.cpp为例（注意：这里解析的是TaharezLook.looknfeel文件），分析下xml代码与C++代码的关系。打开CEGUIFalagard_xmlHandler.cpp，首先是一堆字符串常量，对应着xml里面的各种字符串，然后构造函数初始化了些什么东西其实我们可以在falagard/CEGUIFalagard_xmlHandler.h的最后找到。下面注册了很多Handler，其实这个是在构造一个map，map结构算是stl里面比较难的一类了，其本质是红黑树，我们现在分析的话只需要知道他可以建立一个映射关系，能够方便的通过String来查找相应的类实体，不过有时间的话建议搜一下了解了解，好了来看这个函数
+ 
+void Falagard_xmlHandler::elementStartLocal(const String& element, const XMLAttributes& attributes)
+ 
+然后找到
+ 
+(this->*(iter->second))(attributes);
+ 
+　　在这里下断点。这一句利用函数指针进行操作，这里完成了不同元素的分发。重新单步启动工程，F5一直到这个断点，然后F11跟进去（当然这次你先进去的是xtree），你会来到真正的代码位置，不过第一次比较不幸
+ 
+void Falagard_xmlHandler::elementFalagardStart(const XMLAttributes&)
+ 
+函数没有给我们任何好用的信息，F5回到上个断点，再跟进去，这次我们来到了
+ 
+void Falagard_xmlHandler::elementWidgetLookStart(const XMLAttributes& attributes)
+ 
+　　好了，这次我们看到函数根据attributes的值new了相应的东西，继续这样操作的话，你会发现这就是在解释xml的数据了，有的力哦面包含了一些实现（例如：elementColourPropertyStart，当然跟进去你会失望，因为那里并没有我们想要的实现，只是单纯的赋值而已）。看了Start，然后我们再来看看End，在后来的End函数里，调用了上一层的add函数完成map的搭建之后，删除了之前new出来的东西。这里比较有意思的就是PropertyDefinition还有PropertyLinkDefinition，由于map的特性使得我们可以在xml里面自定义一些变量然后自己调用，使得xml编辑更灵活。
+　　xmlHandler解析了xml，然后我们需要去另外一个地方去看看程序接下来要干什么，打开CEGUIScheme.cpp并找到
+void Scheme::loadResources(void)
+只通过log输出我们就能知道这些代码是干什么的，这个时候其实比较乱了，你需要shift+F11往上一层退了，呵呵。
+shift+F11来到CEGUISchemeManager.cpp中的object.loadResources();
+然后会到CEGUINamedXMLResourceManager.h
+再然后我们到了CEGUINamedXMLResourceManager.h中的
+    return doExistingObjectAction(xml_loader.getObjectName(),
+                                  &xml_loader.getObject(), action);
+然后我们会回到Sample_FirstWindow.cpp中的SchemeManager::getSingleton().create("TaharezLook.scheme");函数。
+ 
+　　好了我们应该小结一下SchemeManager::getSingleton().create("TaharezLook.scheme");这一句干了什么：
+通过ScheneManager构造object然后启动resourceManager顺次执行了一下load（CEGUIScheme.cpp）
+    loadXMLImagesets();
+    loadImageFileImagesets();
+    loadFonts();
+    loadLookNFeels();
+    loadWindowRendererFactories();
+    loadWindowFactories();
+    loadFactoryAliases();
+    loadFalagardMappings();
+最终效果是建立了一个大map，里面有相应的属性映射。然后我们继续往下看，看这句：
+ 
+Window* root = winMgr.createWindow("TaharezLook/StaticImage", "background_wnd");
+ 
+F11进去到CEGUIWindowManager.cpp，然后F10到
+ 
+newWindow->setLookNFeel(fwm.d_lookName);
+ 
+跟进去到CEGUIFalWidgetLookFeel.cpp，的这个函数：
+ 
+void WidgetLookFeel::initialiseWidget(Window& widget) const
+ 
+　　然后可以仔细看看，其实在这里我们才开始给一个窗口setProperty，当然值得注意的是，这里的实现是先addProperty然后setProperty的。不过这里我们不便细细研究setProperty怎么工作的，后面马上分析，在Sample_FirstWindow.cpp中找到
+ 
+root->setProperty("BackgroundEnabled", "false");
+ 
+下断点，F5运行到这里，然后F11进去，来到CEGUIPropertySet.cpp中的
+ 
+pos->second->set(this, value);
+ 
+这里我们再次暂停一下，在set上 右键->转到定义 来看看解析多义性的对话框，相信你能发现些什么，然后看看pos的值
+ 
+second = 0x643866d8 class CEGUI::FalagardStaticProperties::BackgroundEnabled CEGUI::FalagardStatic::d_backgroundEnabledProperty
+ 
+跟进去，来到了FalStaticProperties.cpp中的
+ 
+wr->setBackgroundEnabled(PropertyHelper::stringToBool(value));
+ 
+　　这句就是真正的setProperty的实现了，当然如果要了解得更清楚一些，跟进CEGUIPropertyHelper.cpp之后好好看一看这个cpp会很有帮助，现在我们继续跟进来到FalStatic.cpp的这个函数;
+ 
+void FalagardStatic::setBackgroundEnabled(bool setting)
+ 
+d_backgroundEnabled = setting;
+ 
+又是只有一个赋值……
+　　其实此时已经距离答案很近了，只要你看看这个函数下面的void FalagardStatic::render()函数就行了，此时还是先 右键->转到定义 看看一共有多少个render吧，然后我们再来看这个render函数的实现，利用刚才赋值的bool变量控制了选择什么样的StateImagery，也就是实际上我们setProperty改变了原本的开关，这个只是基于map映射的，至于对怎么去渲染，这个是后面render的事情，由于render函数具有多个重载，也就使得它能找到合适的property匹配。
+　　那么我们怎么知道window的property有多少呢？这个和继承的基类还有使用的渲染器有关，我们可以先看看CEGUIWindow.cpp，在Event的常量声明下面就是property的常量声明了，而且cpp里面有一些具体的实现代码，例如setArea_impl，常用的大家都有，衍生出来的就要格外注意下了（例如BackgroundEnabled），会在相应的渲染器代码中有实现。
+ 
+　　好了到这里所有的设置都已经完成，我们来看看渲染顺序，当然你要做的第一件事是禁用所有断点，然后shift+F5停止调试，然后来到CEGuiD3D9BaseApplication.cpp中的
+ 
+guiSystem.renderGUI();
+ 
+断点，然后重新启动实例会自动运行到断点处，F11跟进去，来到CEGUISystem.cpp中，在
+ 
+d_activeSheet->render();
+ 
+处下断点，跟进去。来到CEGUIWindow.cpp的void Window::render()函数找到
+ 
+drawSelf(ctx);
+ 
+继续F11单步到void Window::bufferGeometry(const RenderingContext&)中的
+ 
+d_windowRenderer->render();
+ 
+　　跟进去来到了FalagardStaticImage::render()函数，首先调用了FalagardStatic::render();函数，这个函数就是刚刚分析过property的函数，我们继续看渲染，在FalagardStaticImage::render()中的
+ 
+wlf.getStateImagery(imagery_name).render(*d_window);
+ 

@@ -1,0 +1,2 @@
+mkdir share
+sudo mount -t vboxsf shareData /share

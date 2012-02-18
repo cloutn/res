@@ -1,0 +1,45 @@
+ 名称 说明 
+skip    Clone  返回对此 String 实例的引用。 
+ok     Compare  已重载。 比较两个指定的 String 对象。 
+skip     CompareOrdinal  已重载。 通过计算每个字符串中相应 Char 对象的数值来比较两个 String 对象。 
+skip    CompareTo  已重载。 将此实例与指定的对象或 String 进行比较，并返回二者相对值的指示。 
+ok     Concat  已重载。 连接 String 的一个或多个实例，或 Object 的一个或多个实例的值的 String 表示形式。 
+ok    Contains  返回一个值，该值指示指定的 String 对象是否出现在此字符串中。 
+ok     Copy  创建一个与指定的 String 具有相同值的 String 的新实例。 
+skip    CopyTo  将指定数目的字符从此实例中的指定位置复制到 Unicode 字符数组中的指定位置。 
+skip    EndsWith  已重载。 确定 String 的实例的末尾是否与指定的字符串匹配。 
+skip     Equals  已重载。 确定两个 String 对象是否具有相同的值。 
+skip    Finalize  允许 Object 在“垃圾回收”回收 Object 之前尝试释放资源并执行其他清理操作。 （继承自 Object。） 
+ok     Format  已重载。 将指定的 String 中的每个格式项替换为相应对象的值的文本等效项。 
+skip    GetEnumerator  检索一个可以循环访问此字符串中的每个字符的对象。 
+skip    GetHashCode  返回该字符串的哈希代码。 （重写 Object..::.GetHashCode()()()。） 
+skip    GetType  获取当前实例的 Type。 （继承自 Object。） 
+skip    GetTypeCode  返回类 String 的 TypeCode。 
+ok    IndexOf  已重载。 报告 String 或一个或多个字符在此字符串中的第一个匹配项的索引。 
+skip    IndexOfAny  已重载。 报告指定 Unicode 字符数组中的任意字符在此实例中第一个匹配项的索引。 
+ok    Insert  在此实例中的指定索引位置插入一个指定的 String 实例。 
+skip     Intern  检索系统对指定 String 的引用。 
+skip     IsInterned  检索对指定 String 的引用。 
+skip  IsNormalized  已重载。 指示此字符串是否符合特定的 Unicode 范式。 
+skip     IsNullOrEmpty  指示指定的 String 对象是 nullNothingnullptrnull 引用（在 Visual Basic 中为 Nothing） 还是 Empty 字符串。 
+skip     Join  已重载。 在指定 String 数组的每个元素之间串联指定的分隔符 String，从而产生单个串联的字符串。 
+ok    LastIndexOf  已重载。 报告指定的 Unicode 字符或 String 在此实例中的最后一个匹配项的索引位置。 
+skip    LastIndexOfAny  已重载。 报告在 Unicode 数组中指定的一个或多个字符在此实例中的最后一个匹配项的索引位置。 
+skip    MemberwiseClone  创建当前 Object 的浅表副本。 （继承自 Object。） 
+skip  Normalize  已重载。 返回一个新字符串，其二进制表示形式符合特定的 Unicode 范式。 
+skip    PadLeft  已重载。 右对齐此实例中的字符，在左边用空格或指定的 Unicode 字符填充以达到指定的总长度。 
+skip    PadRight  已重载。 左对齐此字符串中的字符，在右边用空格或指定的 Unicode 字符填充以达到指定的总长度。 
+ok    Remove  已重载。 从此实例中删除指定个数的字符。 
+ok    Replace  已重载。 将此实例中的指定 Unicode 字符或 String 的所有匹配项替换为其他指定的 Unicode 字符或 String。 
+ok    Split  已重载。 返回的字符串数组包含此实例中的子字符串（由指定字符串或 Unicode 字符数组的元素分隔）。 
+skip    StartsWith  已重载。 确定 String 实例的开头是否与指定的字符串匹配。 
+ok    Substring  已重载。 从此实例检索子字符串。 
+ok    ToCharArray  已重载。 将此实例中的字符复制到 Unicode 字符数组。 
+ok    ToLower  已重载。 返回此 String 转换为小写形式的副本。 
+skip  ToLowerInvariant  返回此 String 对象的转换为小写形式的副本，返回时使用固定区域性的大小写规则。 
+skip    ToString  已重载。 将此实例的值转换为 String。 
+ok    ToUpper  已重载。 返回此 String 转换为大写形式的副本。 
+skip  ToUpperInvariant  返回此 String 对象的转换为大写形式的副本，返回时使用固定区域性的大小写规则。 
+ok    Trim  已重载。 从当前 String 对象移除一组指定字符的所有前导匹配项和尾部匹配项。 
+ok    TrimEnd  从当前 String 对象移除数组中指定的一组字符的所有尾部匹配项。 
+ok    TrimStart  从当前 String 对象移除数组中指定的一组字符的所有前导匹配项。 

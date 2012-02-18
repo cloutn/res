@@ -1,0 +1,253 @@
+Windows环境下使用VC自带的工具dumpbin查看符号表
+今天工作中需要查看dll中的内部结构 所以重点学习了一下dumpbin的用法
+
+dumpbin.exe在\VC\BIN目录下，如果在其他目录下无法使用dumpbin，可以运行该目录下VCVARS32.BAT，这个批处理文件就是用来修复VC环境的。
+
+下面列出了 DUMPBIN 命令行选项。 此外列出每个选项提供的输出的一些了。 
+
+/ ALL 显示除代码反汇编外的所有可用信息。 使用 /DISASM 选项显示反汇编。 您可以使用 /RAWDATA： NONE 与该 /ALL 选项省略原始二进制文件的详细信息。
+
+因为该/ALL 选项是只是所有其他选项的组合，则不需要一个示例。
+/ ARCHIVEMEMBERS 显示在库中的成员对象的最少信息。
+
+输出文件的大小取决于库中的对象模块的数量。 以下是从 Scrnsave.lib 文件输出的一部分：
+Archive member name at 582: /0        ..\..\common\retail\scrnsave.obj
+2FF359CC time/date Thu Jun 29 18:56:28 1995
+         uid
+         gid
+  100666 mode
+    214A size
+correct header end
+					
+/ DISASM 显示使用的符号，如果文件中存在的代码段的反汇编。
+
+以下是从 Lib.exe 文件反汇编代码的一部分：
+00401000: 8B 44 24 08        mov         eax,dword ptr [esp+8]
+00401004: 68 00 20 40 00     push        402000h
+00401009: 8B 4C 24 08        mov         ecx,dword ptr [esp+8]
+0040100D: 50                 push        eax
+0040100E: 51                 push        ecx
+0040100F: E8 0C 00 00 00     call        00401020
+00401014: 33 C0              xor         eax,eax
+00401016: C3                 ret
+00401017: CC                 int         3
+					
+/ 导出 显示所有从可执行文件或 DLL 导出的定义。
+
+MFC40.DLL 产生以下导出信息： 
+
+部分包含以下的导出为 MFC40.DLL
+          0 characteristics
+   30733286 time date stamp Wed Oct 04 18:19:02 1995
+       0.00 version
+          1 ordinal base
+       5782 number of functions
+          4 number of names
+
+ordinal hint   name
+
+      2    0   DllCanUnloadNow  (00096182)
+      1    1   DllGetClassObject  (0009611E)
+      3    2   DllRegisterServer  (000961DB)
+      4    3   DllUnregisterServer  (00096242)
+					
+/ FPO 显示框架指针优化 (FPO) 记录。
+
+一个 MFC 库，Nafxis.lib，使用帧指针优化记录的一些示例提供了我们：
+FPO Data (1)
+                                       Use Has  Frame
+ Address  Proc Size   Locals   Prolog  BP  SEH  Type   Params
+00000000          9        0        0   N   N    fpo        0
+
+FPO Data (1)
+                                       Use Has  Frame
+ Address  Proc Size   Locals   Prolog  BP  SEH  Type   Params
+00000000         11        0        0   N   N    fpo        C
+
+FPO Data (1)
+                                       Use Has  Frame
+ Address  Proc Size   Locals   Prolog  BP  SEH  Type   Params
+00000000          3        0        0   N   N    fpo        0
+					
+/ 头 显示文件头和每个节标头。 使用与库时, 它将显示为每个成员对象标头。
+
+此信息已显示从资源编译器，Rc.exe：
+FILE HEADER VALUES
+     14C machine (i386)
+       6 number of sections
+306F7A22 time date stamp Sun Oct 01 22:35:30 1995
+       0 file pointer to symbol table
+     1D1 number of symbols
+      E0 size of optional header
+     302 characteristics
+            Executable
+            32 bit word machine
+            Debug information stripped
+
+OPTIONAL HEADER VALUES
+     10B magic #
+    2.60 linker version
+    1E00 size of code
+    1E00 size of initialized data
+       0 size of uninitialized data
+    1144 address of entry point
+    1000 base of code
+    3000 base of data
+         ----- new -----
+ 2BB0000 image base
+    1000 section alignment
+     200 file alignment
+       3 subsystem (Windows CUI)
+    4.00 operating system version
+    4.00 image version
+    3.50 subsystem version
+    8000 size of image
+     400 size of headers
+    62C8 checksum
+  100000 size of stack reserve
+    1000 size of stack commit
+  100000 size of heap reserve
+    1000 size of heap commit
+       0 [       0] address [size] of Export Directory
+    5000 [      3C] address [size] of Import Directory
+    6000 [     394] address [size] of Resource Directory
+       0 [       0] address [size] of Exception Directory
+       0 [       0] address [size] of Security Directory
+    7000 [     21C] address [size] of Base Relocation Directory
+    3030 [      38] address [size] of Debug Directory
+       0 [       0] address [size] of Description Directory
+       0 [       0] address [size] of Special Directory
+       0 [       0] address [size] of Thread Storage Directory
+       0 [       0] address [size] of Load Configuration Directory
+     268 [      44] address [size] of Bound Import Directory
+    50A0 [      64] address [size] of Import Address Table Directory
+       0 [       0] address [size] of Reserved Directory
+       0 [       0] address [size] of Reserved Directory
+       0 [       0] address [size] of Reserved Directory
+
+SECTION HEADER #1
+   .text name
+    1D24 virtual size
+    1000 virtual address
+    1E00 size of raw data
+     400 file pointer to raw data
+       0 file pointer to relocation table
+    3C20 file pointer to line numbers
+       0 number of relocations
+     37E number of line numbers
+60000020 flags
+         Code
+         (no align specified)
+         Execute Read
+					
+/ IMPORTS 显示导入到可执行文件或 DLL 的所有定义。
+
+此处显示输出结果是类似于 /EXPORTS 输出。
+/ LINENUMBERS 显示 COFF 行号。 如果它用在程序数据库 (/ zi) C7 兼容编译对象文件中存在行号 (/ Z7），或行号仅 (/ zd) 切换。 可执行文件或 DLL 包含 COFF 行号，如果它已链接与生成调试信息 (/ DEBUG) 和 COFF 格式 (/ DEBUGTYPE:COFF) 选项。
+
+使用应用程序向导生成的应用程序显示行信息数据，如下列:
+LINENUMBERS #1
+   1E90   13     1ECD   13     1EF7   13     1F16   13     1F31   15
+   1F46   15     1F61   24     1F9A   27     1FD0   2A     2001   2B
+					
+/ LINKERMEMBER [： {1|2}] 显示在库中定义的公共符号。 指定 1 参数来连同其偏移量的对象顺序显示符号。 指定 2 参数来显示偏移量和索引号的对象，然后列表按字母顺序沿对象索引，为每个符号。 若要将这两个输出数字的参数没有指定 /LINKERMEMBER。
+
+要获取的 DUMPBIN 输出下面的示例使用了 Winmmm.lib，Windows 多媒体库。
+Archive member name at 8: / 
+2FB537E1 time/date Sat May 13 15:51:13 1995
+         uid
+         gid
+       0 mode
+    2864 size
+correct header end
+
+    391 public symbols
+
+     556C _CloseDriver@12
+     58A0 _DefDriverProc@20
+     5BDC _DriverCallback@28
+     5F1C _DrvGetModuleHandle@4
+     626A _GetDriverModuleHandle@4
+     65C4 _NotifyCallbackData@20
+     6914 _OpenDriver@12
+     6C44 _PlaySound@12
+     6F70 _PlaySoundA@12
+     72A0 _PlaySoundW@12
+					
+/ OUT： 文件名 指定输出文件名。 榛樿鎯呭喌涓嬶，DUMPBIN 到标准输出中显示的信息。 
+
+/ RAWDATA [： {BYTES|SHORTS|LONGS|NONE} [，号]] 显示文件中的每一节中的原始内容。 参数控制所显示的格式，如下所示：
+
+Argument    Result
+
+BYTES      The default. Contents are displayed in hexadecimal bytes,
+           and also as ASCII characters if they have a printed
+           representation.
+SHORTS     Contents are displayed as hexadecimal words.
+LONGS      Contents are displayed as hexadecimal longwords.
+NONE       Raw data is suppressed. This argument is useful to control
+           the output of /ALL.
+number     Displayed lines are set to a width that holds <number> values
+           per line.
+					
+使用此选项生成信息相当大，这是从应用程序中使用该 LONGS 设置格式的应用程序向导的输出的一个小示例：
+RAW DATA #1
+00000000  53EC8B55 00A15756 | E9004058 00000000      U[ASCII 239]_SVW[ASCII
+237].|X@._...._
+00000010  C95B5E5F EC8B55C3 | 5304EC83 4D895756      _^[++U[ASCII
+239]_|[ASCII 226]_.SVW[ASCII 235]M_
+00000020  3058B8FC 00E90040 | 5F000000 C3C95B5E      n+X0@._.|..._^[++_
+					
+/ 重定位 显示对象或图像中的任何重定位。
+
+下面从应用程序向导应用程序获得的重定位输出一小部分：
+BASE RELOCATIONS #6
+
+    1000 virtual address,       B0 SizeOfBlock
+       7 HIGHLOW
+      22 HIGHLOW
+      36 HIGHLOW
+      67 HIGHLOW
+      89 HIGHLOW
+					
+/ 部分： 部分 将输出限制到指定的节上的信息。 
+
+/ 姒傝 显示有关各节包括总大小的最少信息。 如果不指定任何其他选项，则此选项为默认值。
+
+Microsoft (R) COFF Binary File Dumper Version 3.00.5270
+Copyright (C) Microsoft Corp 1992-1995. All rights reserved.
+
+Dump of file tracer.exe
+
+File Type: EXECUTABLE IMAGE
+
+     Summary
+
+        1000 .data
+        1000 .idata
+        1000 .rdata
+        1000 .reloc
+        1000 .rsrc
+        1000 .text
+					
+/ 符号 显示 COFF 符号表。 符号表存在于所有对象文件中。 只有当它处于链接与生成调试信息和 COFF 格式选项在调试信息下的调试类别上为链接器 （或命令行上的 /DEBUG 和 /DEBUGTYPE:COFF 选项），COFF 符号表出现在图像文件。
+
+应用程序向导应用程序用于获取下面的示例：
+COFF SYMBOL TABLE
+000 000065D0 SECT5  notype       Static       | .rsrc$02
+001 00000011 DEBUG  notype       Filename     | .file
+ C:\code\test\testView.cpp
+004 000041A0 SECT3  notype       Static       | $SG23289
+005 00004018 SECT3  notype       Static       | _$S189$S23301
+006 00004168 SECT3  notype       Static       | _THIS_FILE$S23282
+007 00001E90 SECT1  notype       Static       | .text
+ Section length  2DE, #relocs   27, #linenums   22
+009 00001EE2 SECT1  notype ()    Static       | _$E188
+00A 00001EF7 SECT1  notype ()    Static       | _$E187
+ tag index 0000002E size 0000001F lines 000012DF next function 00000033
+00C 000042AC SECT3  notype       Static       | __init_CTestView$S23291
+00D 00003998 SECT2  notype       Static       | $T23440
+00E 00003978 SECT2  notype       Static       | $T23438
+00F 000039C0 SECT2  notype       Static       | $T23447
+010 000039A0 SECT2  notype       Static       | $T23446
+011 00000021 DEBUG  notype       Filename     | .file

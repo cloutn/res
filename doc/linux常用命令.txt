@@ -1,0 +1,16 @@
+如果要让系统启动时自动挂载这个共享文件夹,则可以在/etc/fstab中加入一条记录,具体如下:
+sudo pico /etc/fstab
+加入一句:
+sharedfolder   /mnt/share  vboxsf defaults 0 0
+
+
+分辨率修改
+/etc/X11/
+
+
+查看系统编码
+locale -a
+
+
+查找文件
+　find /etc -name '*srm*'

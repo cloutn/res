@@ -1,0 +1,52 @@
+
+文件命名规范：统一使用大小写交替形式，不使用复数形式
+目录命名规范：统一使用大小写交替形式，不使用复数形式
+例如 
+Array.h
+ArrayList.h
+CvsRevision.h
+
+缩写说明：
+以下单词可以并必须使用英文缩写，除此之外其他单词必须使用全称：
+destination 缩写为dest
+
+不可是使用缩写单词实例：
+source 不可以缩写为 src
+length 不可以缩写为 len
+
+
+const int NameLength 	= 32;
+const int MaxID		= 100;
+struct TeamMember
+{
+	char name[NameLength];
+	int  level;
+};
+
+class Team
+{
+public:
+	void SetID(const int value);
+	void Work();
+private:
+	int	m_id;
+};
+
+void Team::SetID(const int value)
+{
+	m_id = value;
+}
+
+void Team::Work()
+{
+	if (m_id < 0)
+		return;
+	
+	if (m_id > MaxID / 2)
+	{
+		for (int i = 0; i < MaxID / 2; ++i)
+		{
+			m_id = m_id + i * 2;
+		}
+	}
+}

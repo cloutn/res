@@ -1,0 +1,41 @@
+
+其他杂类：
+1.封2副本设计
+2.设计DB类，参考封2
+4.测试WinForm和WPF的效率
+
+服务器部分：
+1.读表，通用的自动序列化方式，考虑gamedev.net的a simple object xxx
+2.MySQL服务器
+3.select，epoll，完成端口
+4.哈希表,sha1,md5,bf blue field fill算法,OPEN SSL
+5.树的实现
+6.寻路算法
+7.平台库，timer，guid
+8.整理代码组织结构，合并simplecl和tool
+9.tinyXML
+10.miniDump
+11.zlib
+12.写个状态机，很多地方都要用，在找个画状态图的工具
+13.lua
+14.共享内存
+15.google protocol buffer.pptx
+表格读取部分如果全采用枚举会导致逻辑代码冗余很大。
+
+ringBuffer内存泄露
+ringBuffer代码整理
+ringBuffer的Used和Free命名不太好，请参考.net
+
+测试for和memcpy的效率
+
+客户端3D部分：
+1.软引擎
+2.学习ogre
+3.fmul和imul汇编指令消耗的cpu周期
+4.测试WinForm和WPF的效率
+
+为什么向量夹角用点乘，点乘公式的推导
+
+
+14w面，30帧
+

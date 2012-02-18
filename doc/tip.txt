@@ -1,0 +1,53 @@
+------------------------------------
+------ 	tip
+------------------------------------
+1.如果LogicEditor需要使用静态链接的MFC库，
+需要在链接属性中的忽略库中加入（Debug模式）：
+uafxcwd.lib;libcmtd.lib
+然后在链接属性的引用库中加入：
+uafxcwd.lib;libcmtd.lib
+
+这样做是为了调整链接顺序，保证链接的正确执行。
+Release下这两个文件是：uafxcw.lib;libcmt.lib
+
+
+------------------------------------
+catui渲染机制的进化过程：
+
+关于UI渲染机制需要达到的目标：
+一帧中尽量少的DrawCall
+当大量子控件频繁更新时，能更新尽量少的顶点，而不是整个Window所有控件都更新
+
+（注意，下文中的VertexBuffer在代码中实现为class UIGeometry）
+
+1.首先，是最简单的渲染模型：每个UIObject有自己的draw函数，在这个函数中，UIObject根据自己的位置、大小、子控件等信息，生成VertexBuffer，并用Device.DrawPrimitive来绘制出自己。
+注意，draw函数每帧都会被调用。
+
+机制1的评价：
+这个模型和DXUT中的CustomUI例子非常类似，但是存在如下的问题：
+a.从位置、大小这些信息生成VertexBuffer的过程，并不需要每帧都计算，只需要在UIObject的位置、大小信息改变的时候，才需要重新计算。
+b.如果每个UIObject都有自己的VertexBuffer，那会导致存在大量的零散的VertexBuffer。（因为很多UI窗口都会有上百的子控件）
+零散的VertexBuffer的效率在更新软件顶点到硬件顶点的过程中可能会效率较低。
+
+2.在1的基础上修改，UIObject不再有自己的VertexBuffer，而是统一由Frame这样的容器控件来提供VertexBuffer，作为参数传给子UIObject，子UIObject在父控件传进来的VertexBuffer上绘制。
+同时，设置一个标志位，needRedraw，只有needRedraw为true的时候，Frame才会重新生成VertexBuffer，这样在UIObject内容没有发生变化的情况下，对于draw的调用仅仅是一次DrawPrimitive
+
+机制2的评价：needRedraw很好的解决了 1中的a问题，
+统一的VertexBuffer又很好的解决了1中的b问题，但是统一的VertexBuffer引入了一个新的问题：对于一些频繁更新的UIObject，比如Icon冷却，那么几乎每一帧，Icon控件都会导致父控件直至根Frame的更新，这样几乎就损失了needRedraw带来的好处。
+
+3.针对2中的问题，我们可以考虑给予一些特殊控件在不通知父控件更新情况下的自绘制的能力。
+怎么实现呢？假设有一个自绘控件叫icon，那么icon拥有自己的GeometryList，当icon改变的时候，应该修改自己的GeometryList。
+问题是，icon自己的draw call在哪里被调用？先假设在父控件的draw函数调用，那么由于draw call的顺序会影响窗口之间的层级关系，所以父控件必须严格遵守控件的绘制顺序，那么父控件必须先绘制其他一些静态的非自绘制控件到自己的GeometryList中，然后绘制icon的GeometryList，然后绘制其他在icon后面的非自绘制的控件。
+既然如此，那么GeometryList中就应该不光包含Geometry，还应该可以包含GeometryList，有点类似于组合模式（通过简单的在Geometry中添加一个GeometryList指针即可近似实现）。好了，如果把icon的GeometryList放在父控件的GeometryList中，那么我们就要让icon记住，自己在父控件中的GeometryList的index。悲剧的是，这个index可能由于其他控件内容改变而发生变化，每当这种时候，就要通知icon修改这个index，所以GeometryList中还要记录哪个控件绑定在当前的index上，这太复杂了！！！
+
+换个思路，假如控件之间的关系不依赖于draw call的调用顺序，那么icon什么时候绘制都和父控件无关了。
+怎么搞呢？很简单，使用z坐标来控制控件之间的覆盖关系。
+每个根Frame都占用1024个Z的控件，Z轴范围是0 ~ 2的24次方减1，所以一共可以包含16K个frame
+保留最前端的(最靠近屏幕的)1k个frame和最后端的1k个frame，那么用户一共可以创建14k个frame，1万多的根frame，怎么都够用了……
+
+
+
+
+
+
+

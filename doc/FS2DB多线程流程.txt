@@ -1,0 +1,30 @@
+
+一：
+当logic线程中发起一条sql请求的时候，实际上是将需要执行的sql内容发送到了CProcedure.m_Ring的环形缓冲区中，
+
+
+二:
+然后sql执行是在下面线程中执行的。
+sql的执行位于CProcedure::ThreadFunction（cfs_fs2_procedure.cpp）
+每个线程有个环形缓冲区m_Ring[ulParam].RcvPack( datasize );
+取出sql执行后，调用MYSQL执行。
+
+三：
+执行后，将执行结果拷贝到栈上的char szRetBuffer[MAX_SQLBUFF_LEN];（这个过程通过HandleProcRet函数，实际上是通过CProcRet类来完成的）
+然后调用回调函数，
+回调函数是在这里设置的Controller::InitNetDB( )，具体实现如下
+m_pDBInterface->Start( &Controller::DBOperationCallBack)
+
+四：
+DBOperationCallBack只是简单的调用了Controller::Singleton( ).PushData（）
+PushData函数实现节选如下：（其实就是将Ret写入了一个环形buffer）
+	case protocol_type_db:
+		m_GlobalRB.SndPack( pData, datasize );
+		break;
+
+五：
+然后，逻辑线程（Controller::logic函数）的ProcessDBPak从m_GlobalRB中获取数据，将数据转为IProcRet，最后
+调用Core->DbOpComplete(x,  pRet)（unit.PushData最终也是调用到这里），从而逻辑线程可以处理这个数据了
+
+
+
