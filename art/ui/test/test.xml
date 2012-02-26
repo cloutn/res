@@ -114,10 +114,10 @@
 			height="50" 
 			font="Î¢ÈíÑÅºÚ" 
 			fontSize="16" 
-			fontColor="0xFFAABBCC"
+			fontColor="0xFFFFC700"
 			hoverColor = "FFFFFFFF"
 			normalColor = "FFFFFFFF"
-			text="          µÇÂ¼">
+			text="µÇÂ¼">
 			<NormalTexture file="ui/ButtonUp.png">
 				<TexCoords left="0" right="0.578125" top="0" bottom="0.75"/>
 			</NormalTexture>
