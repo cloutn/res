@@ -62,16 +62,15 @@
 			height="37" 
 			color="0"
 			texture="" 
-			font="Î¢ÈíÑÅºÚ" 
-			fontSize="16" 
-			fontColor="0xFFFFFFFF"
 			borderSizeX="11" 
 			borderSizeY="5"
 			selectBackgroundColor = "66FFFFFF"
 			caretWidth= "4"
 			caretColor = "FFFFFFFF"
-			enableCaretBlink="false"
-			text="_j33">
+			enableCaretBlink="false">
+			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFFFFF" text="name">
+				<Anchor point="lefttop" y = "5"/>
+			</FontString>
 			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
 				<BackgroundInsets>
 					<AbsInset left="10" right="5" top="4" bottom="9"/>
@@ -86,16 +85,15 @@
 			height="37" 
 			color="0"
 			texture="" 
-			font="Î¢ÈíÑÅºÚ" 
-			fontSize="16" 
-			fontColor="0xFFFFFFFF"
 			borderSizeX="11" 
 			borderSizeY="5"
 			selectBackgroundColor = "66FFFFFF"
 			caretWidth= "4"
 			caretColor = "FFFFFFFF"
-			enableCaretBlink="false"
-			text="password">
+			enableCaretBlink="false">
+			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFFFFF" text="password">
+				<Anchor point="lefttop" y = "5"/>
+			</FontString>
 			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
 				<BackgroundInsets>
 					<AbsInset left="10" right="5" top="4" bottom="9"/>
@@ -107,13 +105,12 @@
 			positionX="25" 
 			positionY="90" 
 			width="150" 
-			height="50" 
-			font="Î¢ÈíÑÅºÚ" 
-			fontSize="16" 
-			fontColor="0xFFFFC700"
+			height="50"
 			hoverColor = "FFFFFFFF"
-			normalColor = "FFFFFFFF"
-			text="µÇÂ¼">
+			normalColor = "FFFFFFFF">
+			<FontString name = "test_bt1_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFC700" text="µÇÂ¼">
+				<Anchor point="center" y = "-6"/>
+			</FontString>
 			<NormalTexture file="ui/ButtonUp.png">
 				<TexCoords left="0" right="0.578125" top="0" bottom="0.75"/>
 			</NormalTexture>
