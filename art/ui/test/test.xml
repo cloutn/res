@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="gb2312"?>
 <Frame
 	name="test" 
-	width="1024" 
-	height="1024" 
-	positionX="0" 
-	positionY="0" 
+	width="800" 
+	height="600" 
 	color = "0x00000000"
 	movable="false">
 	<Frame
@@ -49,11 +47,10 @@
 	</Frame>
 	<Frame
 		name="sub_1" 
-		width="200" 
-		height="500" 
-		positionX="300" 
-		positionY="250" 
+		width="205" 
+		height="135" 
 		color = "0x00000000">
+		<Anchor point="center"/>
 		<EditBox 
 			name="test_editbox1" 
 			positionX="0" 
