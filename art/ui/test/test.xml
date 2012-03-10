@@ -56,16 +56,16 @@
 			positionX="0" 
 			positionY="0" 
 			width="200" 
-			height="40" 
+			height="37" 
 			color="0x00FFFFFF"
 			borderSizeX="11" 
-			borderSizeY="9"
+			borderSizeY="5"
 			selectBackgroundColor = "66FFFFFF"
 			caretWidth= "4"
 			caretColor = "FFFFFFFF"
 			enableCaretBlink="false">
 			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFFFFF" text="name">
-				<Anchor point="lefttop" y = "9"/>
+				<Anchor point="lefttop" y = "5"/>
 			</FontString>
 			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
 				<BackgroundInsets>
