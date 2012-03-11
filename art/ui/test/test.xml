@@ -65,7 +65,7 @@
 			caretColor = "FFFFFFFF"
 			enableCaretBlink="false">
 			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFFFFF" text="name">
-				<Anchor point="lefttop" y = "5"/>
+				<!--Anchor point="lefttop" y = "5"/-->
 			</FontString>
 			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
 				<BackgroundInsets>
