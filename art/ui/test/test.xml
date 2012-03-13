@@ -72,6 +72,9 @@
 					<AbsInset left="10" right="5" top="4" bottom="9"/>
 				</BackgroundInsets>
 			</Backdrop>
+			<OnTabPressed>
+				test_editbox2:SetFocus();
+			</OnTabPressed>
 		</EditBox>
 		<EditBox 
 			name="test_editbox2" 
@@ -95,6 +98,9 @@
 					<AbsInset left="10" right="5" top="4" bottom="9"/>
 				</BackgroundInsets>
 			</Backdrop>
+			<OnTabPressed>
+				test_editbox1:SetFocus();
+			</OnTabPressed>
 		</EditBox>
 		<Button 
 			name="test_bt1" 
