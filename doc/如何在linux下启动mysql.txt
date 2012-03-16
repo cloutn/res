@@ -3,3 +3,6 @@
 ªÚ’ﬂ÷¥––£∫
 
 service mysqld start
+
+
+

@@ -7,7 +7,8 @@ end
 local g_face_i = 0
 
 function bt1_OnClick()
-	g_face_i = g_face_i + 1
-	print("bt1_OnClick")
-	tb1:SetText(g_face_i .. "_" ..  tb1:GetText());
+	Login(login_edtAccountName:GetText(), login_edtPassword:GetText())
+	--g_face_i = g_face_i + 1
+	--print("bt1_OnClick")
+	--tb1:SetText(g_face_i .. "_" ..  tb1:GetText());
 end
