@@ -19,8 +19,8 @@
 #ifndef BASE64_H
 #define BASE64_H
 
-/* Get size_t. */
-# include <stddef.h>
+/* Get int. */
+//# include <stddef.h>
 
 /* Get bool. */
 //# include <stdbool.h>
@@ -32,15 +32,15 @@
 
 extern bool isbase64 (char ch);
 
-extern void base64_encode (const char * in, size_t inlen,
-			   char * out, size_t outlen);
+extern void base64_encode (const char * in, int inlen,
+			   char * out, int outlen);
 
-extern size_t base64_encode_alloc (const char *in, size_t inlen, char **out);
+extern int base64_encode_alloc (const char *in, int inlen, char **out);
 
-extern bool base64_decode (const char * in, size_t inlen,
-			   char * out, size_t *outlen);
+extern bool base64_decode (const char * in, int inlen,
+			   char * out, int *outlen);
 
-extern bool base64_decode_alloc (const char *in, size_t inlen,
-				 char **out, size_t *outlen);
+extern bool base64_decode_alloc (const char *in, int inlen,
+				 char **out, int *outlen);
 
 #endif /* BASE64_H */

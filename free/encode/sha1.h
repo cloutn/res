@@ -66,6 +66,9 @@ int SHA1Input(  SHA1Context *,
 int SHA1Result( SHA1Context *,
                 uint8_t Message_Digest[SHA1HashSize]);
 
+//return 0 if success, else error code
+int SHA1String(const char* in, const int in_len, char* out, const int out_len);
+
 #endif
 
 

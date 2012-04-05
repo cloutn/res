@@ -25,6 +25,7 @@ documentation and/or software.
 
 //#include "global.h"
 #include "md5.h"
+#include <assert.h>
 
 /* Constants for MD5Transform routine.
  */
@@ -330,6 +331,20 @@ unsigned int len)
 
   for (i = 0; i < len; i++)
  ((char *)output)[i] = (char)value;
+}
+
+void MD5String(
+	const char* in, 
+	const int in_len, 
+	const char* out, 
+	const int out_len)
+{	
+	assert(out_len >= 16);// MD5 output length is 128bit = 16byte
+
+	MD5_CTX context;
+	MD5Init		(&context);
+	MD5Update	(&context, (unsigned char*)in, in_len);
+	MD5Final	((unsigned char*)out, &context);
 }
 
 

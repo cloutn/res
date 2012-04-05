@@ -32,6 +32,12 @@
 
 #include "sha1.h"
 
+#include <assert.h>
+
+#include <stdio.h>
+ 
+
+
 /*
  *  Define the SHA1 circular left shift macro
  */
@@ -382,6 +388,35 @@ void SHA1PadMessage(SHA1Context *context)
     context->Message_Block[63] = context->Length_Low;
 
     SHA1ProcessMessageBlock(context);
+}
+
+int SHA1String(const char* in, const int in_len, char* out, const int out_len)
+{
+	assert(out_len >= 20);  // SHA1 output length is 160bit = 20byte
+
+	SHA1Context sha;
+	int err = SHA1Reset(&sha);
+    if (err)
+    {
+        fprintf(stderr, "SHA1Reset Error %d.\n", err );
+        return err;
+    }
+
+    err = SHA1Input(&sha, (const unsigned char *)in, in_len);
+    if (err)
+    {
+        fprintf(stderr, "SHA1Input Error %d.\n", err );
+        return err;
+    }
+
+    err = SHA1Result(&sha, (unsigned char*)out);
+    if (err)
+    {
+        fprintf(stderr, "SHA1Result Error %d, could not compute message digest.\n", err);
+		return err;
+    }
+
+    return 0;
 }
 
 

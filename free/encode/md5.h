@@ -43,6 +43,6 @@ void MD5Init (MD5_CTX *);
 void MD5Update (MD5_CTX *, unsigned char *, unsigned int);
 void MD5Final (unsigned char [16], MD5_CTX *);
 
-
+void MD5String (const char* in, const int in_len, const char* out, const int out_len);
 
 

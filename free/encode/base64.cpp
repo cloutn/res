@@ -32,7 +32,7 @@
  *   FAIL: memory allocation error
  * OK: data in OUT/OUTLEN
  *
- * size_t outlen = base64_encode_alloc (in, inlen, &out);
+ * int outlen = base64_encode_alloc (in, inlen, &out);
  * if (out == NULL && outlen == 0 && inlen != 0)
  *   FAIL: input too long
  * if (out == NULL)
@@ -66,8 +66,8 @@ to_uchar (char ch)
    possible.  If OUTLEN is larger than BASE64_LENGTH(INLEN), also zero
    terminate the output buffer. */
 void
-base64_encode (const char * in, size_t inlen,
-	       char * out, size_t outlen)
+base64_encode (const char * in, int inlen,
+	       char * out, int outlen)
 {
   static char b64str[64] = { 0 };
 
@@ -119,10 +119,10 @@ base64_encode (const char * in, size_t inlen,
    memory allocation failed, OUT is set to NULL, and the return value
    indicates length of the requested memory block, i.e.,
    BASE64_LENGTH(inlen) + 1. */
-size_t
-base64_encode_alloc (const char *in, size_t inlen, char **out)
+int
+base64_encode_alloc (const char *in, int inlen, char **out)
 {
-  size_t outlen = 1 + BASE64_LENGTH (inlen);
+  int outlen = 1 + BASE64_LENGTH (inlen);
 
   /* Check for overflow in outlen computation.
    *
@@ -319,10 +319,10 @@ isbase64 (char ch)
    that, when applicable, you must remove any line terminators that is
    part of the data stream before calling this function.  */
 bool
-base64_decode (const char * in, size_t inlen,
-	       char * out, size_t *outlen)
+base64_decode (const char * in, int inlen,
+	       char * out, int *outlen)
 {
-  size_t outleft = *outlen;
+  int outleft = *outlen;
 
   while (inlen >= 2)
     {
@@ -406,15 +406,15 @@ base64_decode (const char * in, size_t inlen,
    input was invalid, in which case *OUT is NULL and *OUTLEN is
    undefined. */
 bool
-base64_decode_alloc (const char *in, size_t inlen, char **out,
-		     size_t *outlen)
+base64_decode_alloc (const char *in, int inlen, char **out,
+		     int *outlen)
 {
   /* This may allocate a few bytes too much, depending on input,
      but it's not worth the extra CPU time to compute the exact amount.
      The exact amount is 3 * inlen / 4, minus 1 if the input ends
      with "=" and minus another 1 if the input ends with "==".
      Dividing before multiplying avoids the possibility of overflow.  */
-  size_t needlen = 3 * (inlen / 4) + 2;
+  int needlen = 3 * (inlen / 4) + 2;
 
   *out = (char*)malloc (needlen);
   if (!*out)
