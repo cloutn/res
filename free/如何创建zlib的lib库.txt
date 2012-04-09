@@ -1,0 +1,6 @@
+windows下，用cmake，然后需要改名，把zconf.h改为zonf.h.old
+
+linux下
+tar zlib-1.2.6.tar.gz
+./configure
+make
