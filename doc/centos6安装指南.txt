@@ -19,10 +19,13 @@ virtualbox这边用的网络连接就是默认的NAT方式。
 
 
 4.安装之后最重要的事情就是和windows的文件共享了.
+必须先安装增强功能！！！！！！
+如果安装增强功能之后，mount指令出错，看看是不是virtual box版本太低了，建议使用VirtualBox-4.1.12-77245-Win.exe
 第一步，在virtual里面设置数据空间，注意设置为固定分配的，至于那个“auto mount”选项，目前情况不明。
 第二部，在centos中安装virtualBox增强工具。注意这里openGL可能安装失败，不用管，反正用不到。
 第三部，在centos中创建以下3个目录 ~/share ~/chill ~/res
-第四部，在centos中执行命令： mount -t vboxsf share ~/share
+第四部，在centos中执行命令： 
+mount -t vboxsf share ~/share
 mount -t vboxsf chill ~/chill
 mount -t vboxsf res ~/res
 如果顺利，那么此时应该已经可以访问 ~/share 等文件夹，并看到windows下面的文件了。
