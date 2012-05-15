@@ -3,3 +3,6 @@
 
 login.lua
 login.xml
+
+#icon.lua
+#icon.xml

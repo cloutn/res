@@ -69,6 +69,8 @@ svn的diff工具可以改为vimdiff，具体需要将~/res/doc/svndiff_vim.sh拷贝到~/svndiff_
 然后修改 ~/.subversion/config,
 diff-cmd = /root/svndiff_vim.sh 
 
+8.注意安装libuuid-devel，才支持guid的生成的编译和链接
+
 
 
 
