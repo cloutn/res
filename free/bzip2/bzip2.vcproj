@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="encode"
-	ProjectGUID="{228AB0C0-91D0-4F27-9CF9-6882F68B632E}"
-	RootNamespace="encode"
+	Name="bzip2"
+	ProjectGUID="{5D91B811-EA93-489A-99DF-B1A4820F8033}"
+	RootNamespace="bzip2"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -46,7 +46,7 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(ProjectDir)/../lib/$(ProjectName).pdb"
+				ProgramDataBaseFileName="$(IntDir)\$(ProjectName).pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -80,7 +80,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ProjectDir)/../lib/release"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
@@ -109,7 +109,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(IntDir)\encode.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -146,27 +145,39 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\base64.cpp"
+			RelativePath=".\blocksort.c"
 			>
 		</File>
 		<File
-			RelativePath=".\base64.h"
+			RelativePath=".\bzlib.c"
 			>
 		</File>
 		<File
-			RelativePath=".\md5.cpp"
+			RelativePath=".\bzlib.h"
 			>
 		</File>
 		<File
-			RelativePath=".\md5.h"
+			RelativePath=".\bzlib_private.h"
 			>
 		</File>
 		<File
-			RelativePath=".\sha1.cpp"
+			RelativePath=".\compress.c"
 			>
 		</File>
 		<File
-			RelativePath=".\sha1.h"
+			RelativePath=".\crctable.c"
+			>
+		</File>
+		<File
+			RelativePath=".\decompress.c"
+			>
+		</File>
+		<File
+			RelativePath=".\huffman.c"
+			>
+		</File>
+		<File
+			RelativePath=".\randtable.c"
 			>
 		</File>
 	</Files>

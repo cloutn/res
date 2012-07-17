@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="encode"
-	ProjectGUID="{228AB0C0-91D0-4F27-9CF9-6882F68B632E}"
-	RootNamespace="encode"
+	Name="libmpq"
+	ProjectGUID="{A651DEFA-3EB2-44AB-9F9B-4476BA525774}"
+	RootNamespace="libmqp"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -41,14 +41,15 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)/../bzip2&quot;;&quot;$(ProjectDir)/../zlib&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(ProjectDir)/../lib/$(ProjectName).pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4996;4200"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -80,7 +81,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ProjectDir)/../lib/release"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
@@ -109,7 +110,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(IntDir)\encode.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -146,27 +146,47 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\base64.cpp"
+			RelativePath=".\common.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\base64.h"
+			RelativePath=".\common.h"
 			>
 		</File>
 		<File
-			RelativePath=".\md5.cpp"
+			RelativePath=".\explode.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\md5.h"
+			RelativePath=".\explode.h"
 			>
 		</File>
 		<File
-			RelativePath=".\sha1.cpp"
+			RelativePath=".\extract.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\sha1.h"
+			RelativePath=".\huffman.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\huffman.h"
+			>
+		</File>
+		<File
+			RelativePath=".\mpq.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\mpq.h"
+			>
+		</File>
+		<File
+			RelativePath=".\wave.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\wave.h"
 			>
 		</File>
 	</Files>

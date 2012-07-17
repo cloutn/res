@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bzip2", "bzip2.vcproj", "{5D91B811-EA93-489A-99DF-B1A4820F8033}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D91B811-EA93-489A-99DF-B1A4820F8033}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5D91B811-EA93-489A-99DF-B1A4820F8033}.Debug|Win32.Build.0 = Debug|Win32
+		{5D91B811-EA93-489A-99DF-B1A4820F8033}.Release|Win32.ActiveCfg = Release|Win32
+		{5D91B811-EA93-489A-99DF-B1A4820F8033}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

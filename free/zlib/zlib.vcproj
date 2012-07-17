@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="encode"
-	ProjectGUID="{228AB0C0-91D0-4F27-9CF9-6882F68B632E}"
-	RootNamespace="encode"
+	Name="zlib"
+	ProjectGUID="{98D04B96-D599-4581-80D8-601DAE5CC0DF}"
+	RootNamespace="zlib"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -46,9 +46,10 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(ProjectDir)/../lib/$(ProjectName).pdb"
+				ProgramDataBaseFileName="$(OutDir)\$(ProjectName).pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -80,7 +81,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ProjectDir)/../lib/release"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
@@ -109,7 +110,6 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="$(IntDir)\encode.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -146,27 +146,107 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\base64.cpp"
+			RelativePath=".\adler32.c"
 			>
 		</File>
 		<File
-			RelativePath=".\base64.h"
+			RelativePath=".\compress.c"
 			>
 		</File>
 		<File
-			RelativePath=".\md5.cpp"
+			RelativePath=".\crc32.c"
 			>
 		</File>
 		<File
-			RelativePath=".\md5.h"
+			RelativePath=".\crc32.h"
 			>
 		</File>
 		<File
-			RelativePath=".\sha1.cpp"
+			RelativePath=".\deflate.c"
 			>
 		</File>
 		<File
-			RelativePath=".\sha1.h"
+			RelativePath=".\deflate.h"
+			>
+		</File>
+		<File
+			RelativePath=".\gzclose.c"
+			>
+		</File>
+		<File
+			RelativePath=".\gzguts.h"
+			>
+		</File>
+		<File
+			RelativePath=".\gzlib.c"
+			>
+		</File>
+		<File
+			RelativePath=".\gzread.c"
+			>
+		</File>
+		<File
+			RelativePath=".\gzwrite.c"
+			>
+		</File>
+		<File
+			RelativePath=".\infback.c"
+			>
+		</File>
+		<File
+			RelativePath=".\inffast.c"
+			>
+		</File>
+		<File
+			RelativePath=".\inffast.h"
+			>
+		</File>
+		<File
+			RelativePath=".\inffixed.h"
+			>
+		</File>
+		<File
+			RelativePath=".\inflate.c"
+			>
+		</File>
+		<File
+			RelativePath=".\inflate.h"
+			>
+		</File>
+		<File
+			RelativePath=".\inftrees.c"
+			>
+		</File>
+		<File
+			RelativePath=".\inftrees.h"
+			>
+		</File>
+		<File
+			RelativePath=".\trees.c"
+			>
+		</File>
+		<File
+			RelativePath=".\trees.h"
+			>
+		</File>
+		<File
+			RelativePath=".\uncompr.c"
+			>
+		</File>
+		<File
+			RelativePath=".\zconf.h"
+			>
+		</File>
+		<File
+			RelativePath=".\zlib.h"
+			>
+		</File>
+		<File
+			RelativePath=".\zutil.c"
+			>
+		</File>
+		<File
+			RelativePath=".\zutil.h"
 			>
 		</File>
 	</Files>

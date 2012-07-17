@@ -19,6 +19,8 @@
 #endif
 
 #include <stdio.h>
+#include <io.h>
+
 #include "zlib.h"
 #ifdef STDC
 #  include <string.h>
