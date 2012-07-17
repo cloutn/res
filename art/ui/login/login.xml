@@ -15,37 +15,6 @@
 		</Texture>
 	</Frame>
 	<Frame
-		name="q02" 
-		width="512" 
-		height="512" 
-		visible = "true">
-		<Anchor point="LEFTTOP" relativeTo = "q01" relativePoint = "RIGHTTOP"/>
-		<Texture file = "ui/q1_02.png">
-			<TexCoords left="0" right="1" top="0" bottom="1"/>
-		</Texture>
-	</Frame>
-	<Frame
-		name="q03" 
-		width="512" 
-		height="256" 
-		positionX="0" 
-		positionY="512"
-		visible = "true">
-		<Texture file = "ui/q1_03.png">
-			<TexCoords left="0" right="1" top="0" bottom="0.5"/>
-		</Texture>
-	</Frame>
-	<Frame
-		name="q04" 
-		width="512" 
-		height="256" 
-		visible = "true">
-		<Anchor point="LEFTTOP" relativeTo = "q01" relativePoint = "RIGHTBOTTOM"/>
-		<Texture file = "ui/q1_04.png">
-			<TexCoords left="0" right="1" top="0" bottom="0.5"/>
-		</Texture>
-	</Frame>
-	<Frame
 		name="sub_1" 
 		width="205" 
 		height="135" 
@@ -64,7 +33,7 @@
 			caretWidth= "4"
 			caretColor = "FFFFFFFF"
 			enableCaretBlink="false">
-			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFFFFF" text="name">
+			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ.ttf" fontSize="16" color="0xFFFFFFFF" text="name">
 				<!--Anchor point="lefttop" y = "5"/-->
 			</FontString>
 			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
@@ -90,7 +59,7 @@
 			caretWidth= "4"
 			caretColor = "FFFFFFFF"
 			enableCaretBlink="false">
-			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFFFFF" text="password">
+			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ.ttf" fontSize="16" color="0xFFFFFFFF" text="password">
 				<Anchor point="lefttop" y = "5"/>
 			</FontString>
 			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
@@ -110,7 +79,7 @@
 			height="50"
 			hoverColor = "FFFFFFFF"
 			normalColor = "FFFFFFFF">
-			<FontString name = "test_bt1_text" font="Î¢ÈíÑÅºÚ" fontSize="16" color="0xFFFFC700" text="µÇÂ¼">
+			<FontString name = "test_bt1_text" font="Î¢ÈíÑÅºÚ.ttf" fontSize="16" color="0xFFFFC700" text="µÇÂ¼">
 				<Anchor point="center" y = "-6"/>
 			</FontString>
 			<NormalTexture file="ui/ButtonUp.png">
