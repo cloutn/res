@@ -10,7 +10,7 @@
 		width="512" 
 		height="512" 
 		visible = "true">
-		<Texture file = "ui/q1_01.png">
+		<Texture file = "ui/loginBackground_01.png">
 			<TexCoords left="0" right="1" top="0" bottom="1"/>
 		</Texture>
 	</Frame>
@@ -20,7 +20,7 @@
 		height="512" 
 		visible = "true">
 		<Anchor point="LEFTTOP" relativeTo = "q01" relativePoint = "RIGHTTOP"/>
-		<Texture file = "ui/q1_02.png">
+		<Texture file = "ui/loginBackground_02.png">
 			<TexCoords left="0" right="1" top="0" bottom="1"/>
 		</Texture>
 	</Frame>
@@ -31,7 +31,7 @@
 		positionX="0" 
 		positionY="512"
 		visible = "true">
-		<Texture file = "ui/q1_03.png">
+		<Texture file = "ui/loginBackground_03.png">
 			<TexCoords left="0" right="1" top="0" bottom="0.5"/>
 		</Texture>
 	</Frame>
@@ -41,7 +41,7 @@
 		height="256" 
 		visible = "true">
 		<Anchor point="LEFTTOP" relativeTo = "q01" relativePoint = "RIGHTBOTTOM"/>
-		<Texture file = "ui/q1_04.png">
+		<Texture file = "ui/loginBackground_04.png">
 			<TexCoords left="0" right="1" top="0" bottom="0.5"/>
 		</Texture>
 	</Frame>

@@ -6,15 +6,6 @@
 	color = "0x00000000"
 	movable="false">
 	<Frame
-		name="q01" 
-		width="512" 
-		height="512" 
-		visible = "true">
-		<Texture file = "ui/q1_01.png">
-			<TexCoords left="0" right="1" top="0" bottom="1"/>
-		</Texture>
-	</Frame>
-	<Frame
 		name="sub_1" 
 		width="205" 
 		height="135" 
@@ -36,7 +27,7 @@
 			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ.ttf" fontSize="16" color="0xFFFFFFFF" text="name">
 				<!--Anchor point="lefttop" y = "5"/-->
 			</FontString>
-			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
+			<Backdrop edgeFile="ui/border.png" bgFile="ui/background.png" color="FF999999">
 				<BackgroundInsets>
 					<AbsInset left="10" right="5" top="4" bottom="9"/>
 				</BackgroundInsets>
@@ -62,7 +53,7 @@
 			<FontString name = "$parent_text" font="Î¢ÈíÑÅºÚ.ttf" fontSize="16" color="0xFFFFFFFF" text="password">
 				<Anchor point="lefttop" y = "5"/>
 			</FontString>
-			<Backdrop edgeFile="border.png" bgFile="background.png" color="FF999999">
+			<Backdrop edgeFile="ui/border.png" bgFile="ui/background.png" color="FF999999">
 				<BackgroundInsets>
 					<AbsInset left="10" right="5" top="4" bottom="9"/>
 				</BackgroundInsets>

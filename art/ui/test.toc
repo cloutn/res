@@ -1,7 +1,0 @@
-
-
-#login/login.lua
-#login/login.xml
-
-test/test.lua
-test/test.xml
